@@ -1,14 +1,14 @@
 pipeline{
     agent none
     environment{
-        BUILD_SERVER_IP='ec2-user@172.31.1.199'
+        BUILD_SERVER_IP='ec2-user@172.31.47.172'
         //DEPLOY_SERVER_IP='ec2-user@13.234.240.74'
-        IMAGE_NAME='devopstrainer/java-mvn-privaterepos:php$BUILD_NUMBER'     
-        ACM_IP='ec2-user@172.31.8.121'
+        IMAGE_NAME='yshevkar/phprepo:v1$BUILD_NUMBER'     
+        ACM_IP='ec2-user@172.31.44.114'
         AWS_ACCESS_KEY_ID =credentials("AWS_ACCESS_KEY_ID")
         AWS_SECRET_ACCESS_KEY=credentials("AWS_SECRET_ACCESS_KEY")
         //created a new credential of type secret text to store docker pwd
-        DOCKER_REG_PASSWORD=credentials("DOCKER_REG_PASSWORD")
+        
     }
     stages{
         stage('BUILD'){
@@ -75,7 +75,7 @@ pipeline{
     withCredentials([sshUserPrivateKey(credentialsId: 'Ansible_target',keyFileVariable: 'keyfile',usernameVariable: 'user')]){ 
     sh "scp  $keyfile ${ACM_IP}:/home/ec2-user/.ssh/id_rsa"    
     }
-    sh "ssh  ${ACM_IP} bash /home/ec2-user/prepare-ACM.sh ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY} ${DOCKER_REG_PASSWORD} ${IMAGE_NAME}"
+    sh "ssh  ${ACM_IP} bash /home/ec2-user/prepare-ACM.sh ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY} ${IMAGE_NAME}"
       }
         }
         }    
