@@ -43,7 +43,7 @@
                 depends_on:
                 - mysql
               mysql:
-                image: devopstrainer/java-mvn-privaterepos:mysql
+                image: yshevkar/sqlrepo:v1
                 volumes:
                 - db_data:/var/lib/mysql
                 environment:
