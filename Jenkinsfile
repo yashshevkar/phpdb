@@ -15,7 +15,7 @@ pipeline{
            agent any
            steps{
             script{
-                sshagent(['build-server']) {
+                sshagent(['aws-key']) {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                 echo "BUILD PHP DOCKERIMAGE AND PUSH TO DOCKERHUB"
                 sh "scp -o StrictHostKeyChecking=no -r docker-files ${BUILD_SERVER_IP}:/home/ec2-user"
@@ -67,7 +67,7 @@ pipeline{
     steps{
         script{
             echo "copy ansible files on ACM and run the playbook"
-            sshagent(['build-server']) {
+            sshagent(['aws-key']) {
     //sh "ssh -o StrictHostKeyChecking=no ${ACM_IP} envsubst < ansible/docker-compose-var.yml > ansible/docker-compose.yml" 
     sh "scp -o StrictHostKeyChecking=no ansible/* ${ACM_IP}:/home/ec2-user"
     
