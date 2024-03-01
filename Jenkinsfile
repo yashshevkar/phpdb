@@ -8,7 +8,7 @@ pipeline{
         AWS_ACCESS_KEY_ID =credentials("AWS_ACCESS_KEY_ID")
         AWS_SECRET_ACCESS_KEY=credentials("AWS_SECRET_ACCESS_KEY")
         //created a new credential of type secret text to store docker pwd
-        DOCKER_REG_PASSWORD=cre("DOCKER_REG_PASSWORD")
+        DOCKER_REG_PASSWORD=credentials("DOCKER_REG_PASSWORD")
     }
     stages{
         stage('BUILD'){
