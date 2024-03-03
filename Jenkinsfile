@@ -16,13 +16,13 @@ pipeline{
            steps{
             script{
                 sshagent(['aws-key']) {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                echo "BUILD PHP DOCKERIMAGE AND PUSH TO DOCKERHUB"
-                sh "scp -o StrictHostKeyChecking=no -r docker-files ${BUILD_SERVER_IP}:/home/ec2-user"
-                sh "ssh -o StrictHostKeyChecking=no  ${BUILD_SERVER_IP} 'bash ~/docker-files/docker-script.sh'"
-                sh "ssh  ${BUILD_SERVER_IP} sudo docker build -t ${IMAGE_NAME} /home/ec2-user/docker-files/"
-                sh "ssh  ${BUILD_SERVER_IP} sudo docker login -u $USERNAME -p $PASSWORD"
-                sh "ssh  ${BUILD_SERVER_IP} sudo docker push ${IMAGE_NAME}"
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    echo "BUILD PHP DOCKERIMAGE AND PUSH TO DOCKERHUB"
+                    sh "scp -o StrictHostKeyChecking=no -r docker-files ${BUILD_SERVER_IP}:/home/ec2-user"
+                    sh "ssh -o StrictHostKeyChecking=no  ${BUILD_SERVER_IP} 'bash ~/docker-files/docker-script.sh'"
+                    sh "ssh  ${BUILD_SERVER_IP} sudo docker build -t ${IMAGE_NAME} /home/ec2-user/docker-files/"
+                    sh "ssh  ${BUILD_SERVER_IP} sudo docker login -u $USERNAME -p $PASSWORD"
+                    sh "ssh  ${BUILD_SERVER_IP} sudo docker push ${IMAGE_NAME}"
                 }
             }
            }
