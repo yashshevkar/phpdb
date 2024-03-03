@@ -1,10 +1,10 @@
 pipeline{
     agent any
     environment{
-        BUILD_SERVER_IP='ec2-user@172.31.47.172'
+        BUILD_SERVER_IP='ec2-user@13.233.186.143'
         //DEPLOY_SERVER_IP='ec2-user@13.234.240.74'
         IMAGE_NAME='yshevkar/phprepo:v1$BUILD_NUMBER'     
-        ACM_IP='ec2-user@172.31.44.114'
+        ACM_IP='ec2-user@172.31.35.116'
         AWS_ACCESS_KEY_ID =credentials("AWS_ACCESS_KEY_ID")
         AWS_SECRET_ACCESS_KEY=credentials("AWS_SECRET_ACCESS_KEY")
         //created a new credential of type secret text to store docker pwd
