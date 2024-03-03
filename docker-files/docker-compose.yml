@@ -1,13 +1,13 @@
 version: "3"
 services:
     web:
-      image: "${DOCKER_IMAGE}"
+      image: yshevkar/phprepo:v1$BUILD_NUMBER
       ports:
       - "8001:80"
       depends_on:
       - mysql
     mysql:
-      image: devopstrainer/java-mvn-privaterepos:mysql
+      image: yshevkar/sqlrepo:v1
       volumes:
       - db_data:/var/lib/mysql
       environment:
